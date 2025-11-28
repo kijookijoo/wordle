@@ -1,0 +1,47 @@
+.header-container {
+    border-style: solid;
+    border-color: white;
+    background-color: #121213;
+    position: absolute;
+    height: 20px;
+    width: 100vw;
+    padding: 20px;
+    z-index: 10;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+
+}
+
+.button-image {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.header-button {
+    all: unset;
+    width: 50px;
+    height: 50px;
+    background: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-button:hover {
+    background-color: #363636;
+}
+
+.subscribe-button {
+    background-color: #121213;
+    border-color: white;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: white;
+    margin-top: 0px;
+}
