@@ -5,9 +5,11 @@
 }
 
 .user-input {
-    position: absolute;
-    top: 80vh;
-    left: 80vh;
-    height: 90px;
-    background-color: white;
+    position: fixed;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    border: none;
+    outline: none;
+    z-index: -1;
 }
