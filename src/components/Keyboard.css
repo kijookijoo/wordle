@@ -7,7 +7,7 @@
   flex-direction: column;
   gap: 10px;
   padding: 20px;
-  background-color: #121213;
+  background-color: black;
   z-index: 100;
   justify-content: center;
   align-items: center;
@@ -25,8 +25,8 @@
 .keyboard-cap-grey, .keyboard-cap-yellow, .keyboard-cap-green {
   all: unset;
   height: 50px;
-  font-family: "Courier New", Courier, monospace;
-  font-weight: 900;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
   background-color: #3a3a3c;
   color: white;
   font-size: 36px;
