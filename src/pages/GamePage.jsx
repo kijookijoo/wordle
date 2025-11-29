@@ -1,6 +1,7 @@
 import './GamePage.css'
 import Header from '../components/Header';
 import Grid from '../components/Grid';
+import Keyboard from '../components/Keyboard';
 
 import { useState, useRef, useEffect } from 'react';
 
@@ -195,6 +196,8 @@ function GamePage() {
             </div>
 
             <Grid grid={grid} gridColor={gridColor} />
+
+            <Keyboard />
 
         </>
 

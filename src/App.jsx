@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import GamePage from './pages/GamePage'
-import Header from './components/Header'
+import Keyboard from './components/Keyboard'
+
 
 import './App.css'
 
@@ -11,6 +12,8 @@ function App() {
     <>
 
         <GamePage />
+        
+
     </>
   )
 }
