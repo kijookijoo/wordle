@@ -1,4 +1,9 @@
-body {
+html, body {
     margin: 0;
+    padding: 0;
+    background-color: black;
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
 }
 

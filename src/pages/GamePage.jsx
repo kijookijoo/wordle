@@ -6,6 +6,9 @@ import Keyboard from '../components/Keyboard';
 import { useState, useRef, useEffect } from 'react';
 
 function GamePage() {
+    const [isGameOver, setIsGameOver] = useState(false);
+    const [gameResult, setGameResult] = useState(null);
+
     const pool = ["ALBUM", "HINGE", "MONEY", "SCRAP", "GAMER", "GLASS", "SCOUR", "BEING", "DELVE", "YIELD", "METAL", "TIPSY", "SLUNG", "FARCE", "GECKO", "SHINE", "CANNY", "MIDST", "BADGE", "HOMER", "TRAIN", "STORY", "HAIRY", "FORGO", "LARVA", "TRASH", "ZESTY", "SHOWN", "HEIST", "ASKEW", "INERT", "OLIVE", "PLANT", "OXIDE", "CARGO", "FOYER", "FLAIR", "AMPLE", "CHEEK", "SHAME", "MINCE", "CHUNK", "ROYAL", "SQUAD", "BLACK", "STAIR", "SCARE", "FORAY", "COMMA", "NATAL", "SHAWL", "FEWER", "TROPE", "SNOUT", "LOWLY", "STOVE", "SHALL", "FOUND", "NYMPH", "EPOXY", "DEPOT", "CHEST", "PURGE", "SLOSH", "THEIR", "RENEW", "ALLOW", "SAUTE", "MOVIE", "CATER", "TEASE", "SMELT", "FOCUS", "TODAY", "WATCH", "LAPSE", "MONTH", "SWEET", "HOARD", "CLOTH", "BRINE", "AHEAD", "MOURN", "NASTY", "RUPEE", "CHOKE", "CHANT", "SPILL", "VIVID", "BLOKE", "TROVE", "THORN", "OTHER", "TACIT", "SWILL", "DODGE", "SHAKE", "CAULK", "AROMA", "CYNIC", "ROBIN", "ULTRA", "ULCER", "PAUSE", "HUMOR", "FRAME", "ELDER", "SKILL", "ALOFT", "PLEAT", "SHARD", "MOIST", "THOSE", "LIGHT", "WRUNG", "COULD", "PERKY", "MOUNT", "WHACK", "SUGAR", "KNOLL", "CRIMP", "WINCE", "PRICK", "ROBOT", "POINT", "PROXY", "SHIRE", "SOLAR", "PANIC", "TANGY", "ABBEY", "FAVOR", "DRINK", "QUERY", "GORGE", "CRANK", "SLUMP", "BANAL", "TIGER", "SIEGE", "TRUSS", "BOOST", "REBUS", "UNIFY", "TROLL", "TAPIR", "ASIDE", "FERRY", "ACUTE", "PICKY", "WEARY", "GRIPE", "CRAZE", "PLUCK", "BRAKE", "BATON", "CHAMP", "PEACH", "USING", "TRACE", "VITAL", "SONIC", "MASSE", "CONIC", "VIRAL", "RHINO", "BREAK", "TRIAD", "EPOCH", "USHER", "EXULT", "GRIME", "CHEAT", "SOLVE", "BRING", "PROVE", "STORE", "TILDE", "CLOCK", "WROTE", "RETCH", "PERCH", "ROUGE", "RADIO", "SURER", "FINER", "VODKA", "HERON", "CHILL", "GAUDY", "PITHY", "SMART", "BADLY", "ROGUE", "GROUP", "FIXER", "GROIN", "DUCHY", "COAST", "BLURT", "PULPY", "ALTAR", "GREAT", "BRIAR", "CLICK", "GOUGE", "WORLD", "ERODE", "BOOZY", "DOZEN", "FLING", "GROWL", "ABYSS", "STEED", "ENEMA", "JAUNT", "COMET", "TWEED", "PILOT", "DUTCH", "BELCH", "OUGHT", "DOWRY", "THUMB", "HYPER", "HATCH", "ALONE", "MOTOR", "ABACK", "GUILD", "KEBAB", "SPEND", "FJORD", "ESSAY", "SPRAY", "SPICY", "AGATE", "SALAD", "BASIC", "MOULT", "CORNY", "FORGE", "CIVIC", "ISLET", "LABOR", "GAMMA", "LYING", "AUDIT", "ROUND", "LOOPY", "LUSTY", "GOLEM", "GONER", "GREET", "START", "LAPEL", "BIOME", "PARRY", "SHRUB", "FRONT", "WOOER", "TOTEM", "FLICK", "DELTA", "BLEED", "ARGUE", "SWIRL", "ERROR", "AGREE", "OFFAL", "FLUME", "CRASS", "PANEL", "STOUT", "BRIBE", "DRAIN", "YEARN", "PRINT", "SEEDY", "IVORY", "BELLY", "STAND", "FIRST", "FORTH", "BOOBY", "FLESH", "UNMET", "LINEN", "MAXIM", "POUND", "MIMIC", "SPIKE", "CLUCK", "CRATE", "DIGIT", "REPAY", "SOWER", "CRAZY", "ADOBE", "OUTDO", "TRAWL", "WHELP", "UNFED", "PAPER", "STAFF", "CROAK", "HELIX", "FLOSS", "PRIDE", "BATTY", "REACT", "MARRY", "ABASE", "COLON", "STOOL", "CRUST", "FRESH", "DEATH", "MAJOR", "FEIGN", "ABATE", "BENCH", "QUIET", "GRADE", "STINK", "KARMA", "MODEL", "DWARF", "HEATH", "SERVE", "NAVAL", "EVADE", "FOCAL", "BLUSH", "AWAKE", "HUMPH", "SISSY", "REBUT", "CIGAR"]
     let currRef = useRef([0, 0]);
 
@@ -81,52 +84,56 @@ function GamePage() {
     }
 
     const handleKeyDown = (event) => {
-        let key = event.key.toUpperCase();
-        let newGrid;
-        let row = currRef.current[0];
-        let col = currRef.current[1];
+        if (!isGameOver) {
 
-        console.log(answerRef.current);
 
-        if (validKey(key)) {
-            switch (key) {
-                case "ENTER":
-                    if (isRowFull()) {
-                        makeguess();
-                    } else {
-                        return;
-                    }
-                    break;
-                case "BACKSPACE":
-                    // TODO
-                    // delete previous character
-                    // ensure that characters in previous columns are not deleted
-                    currRef.current = [row, --col];
+            let key = event.key.toUpperCase();
+            let newGrid;
+            let row = currRef.current[0];
+            let col = currRef.current[1];
 
-                    newGrid = grid.map((row, rowIndex) =>
-                        rowIndex === currRef.current[0]
-                            ? row.map((col, colIndex) =>
-                                colIndex === currRef.current[1] ? "" : col)
-                            : row)
+            console.log(answerRef.current);
 
-                    setGrid(newGrid);
-                    break;
-                default:
-                    if (col > 4) {
-                        return;
-                    }
-                    newGrid = grid.map((row, rowIndex) =>
-                        rowIndex === currRef.current[0]
-                            ? row.map((col, colIndex) =>
-                                colIndex === currRef.current[1] ? key : col)
-                            : row)
-                    setGrid(newGrid);
+            if (validKey(key)) {
+                switch (key) {
+                    case "ENTER":
+                        if (isRowFull()) {
+                            checkAnswer();
+                        } else {
+                            return;
+                        }
+                        break;
+                    case "BACKSPACE":
+                        // TODO
+                        // delete previous character
+                        // ensure that characters in previous columns are not deleted
+                        currRef.current = [row, --col];
 
-                    currRef.current = [row, ++col];
+                        newGrid = grid.map((row, rowIndex) =>
+                            rowIndex === currRef.current[0]
+                                ? row.map((col, colIndex) =>
+                                    colIndex === currRef.current[1] ? "" : col)
+                                : row)
 
-                    if (col === 4) {
-                        setCanGuess(!canGuess);
-                    }
+                        setGrid(newGrid);
+                        break;
+                    default:
+                        if (col > 4) {
+                            return;
+                        }
+                        newGrid = grid.map((row, rowIndex) =>
+                            rowIndex === currRef.current[0]
+                                ? row.map((col, colIndex) =>
+                                    colIndex === currRef.current[1] ? key : col)
+                                : row)
+                        setGrid(newGrid);
+
+                        currRef.current = [row, ++col];
+
+                        if (col === 4) {
+                            setCanGuess(!canGuess);
+                        }
+                }
             }
         }
     }
@@ -137,12 +144,6 @@ function GamePage() {
 
     function isRowFull() {
         return !grid[currRef.current[0]].includes("");
-    }
-
-    function makeguess() {
-        checkAnswer();
-        currRef.current = [currRef.current[0] + 1, 0];
-        console.log("guessed");
     }
 
     function changeColor(targetRow, rowColors) {
@@ -157,8 +158,10 @@ function GamePage() {
     function checkAnswer() {
         const currentRow = currRef.current[0];
         const guess = grid[currentRow].join("");
+
         if (guess === answerRef.current) {
-            console.log('You win!');
+            setGameResult("win");
+            setIsGameOver(true);
         }
 
         let rowColors = [];
@@ -167,7 +170,7 @@ function GamePage() {
         for (let i = 0; i < 5; i++) {
             const letter = grid[currentRow][i];
             let color;
-            
+
             if (answerRef.current[i] === letter) {
                 color = "green";
             } else if (answerRef.current.includes(letter)) {
@@ -175,42 +178,57 @@ function GamePage() {
             } else {
                 color = "grey";
             }
-            
+
             rowColors.push(color);
-            
+
             // Update letter state with priority: green > yellow > grey
-            if (!newLetterStates[letter] || 
-                (color === "green") || 
+            if (!newLetterStates[letter] ||
+                (color === "green") ||
                 (color === "yellow" && newLetterStates[letter] !== "green")) {
                 newLetterStates[letter] = color;
             }
         }
-        
-        console.log(rowColors);
+
         changeColor(currentRow, rowColors);
         setLetterStates(newLetterStates);
-        console.log(gridColor);
+
+        currRef.current = [currRef.current[0] + 1, 0];
+        if (currRef.current[0] > 6) {
+            setGameResult("lose");
+            setIsGameOver(true);
+        }
     }
+
 
     return (
         <>
             <Header />
 
-            <input 
+            <input
                 ref={inputRef}
-                className="user-input" 
-                type='text' 
+                className="user-input"
+                type='text'
                 onKeyDown={handleKeyDown}
                 autoFocus
             />
 
-            <div className="gamepage-container">
-                hi
-            </div>
-
             <Grid grid={grid} gridColor={gridColor} />
 
             <Keyboard letterStates={letterStates} />
+
+            {isGameOver && gameResult === "win" && (
+                <div className='gameover-message-win'>
+                    You Win!
+                </div>
+            )}
+
+            {isGameOver && gameResult === "lose" && (
+                <div className='gameover-message-lose'>
+                    You Lose!
+                    <p>Answer was {answerRef.current}</p>
+                </div>
+            )}
+
 
         </>
 

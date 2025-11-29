@@ -29,7 +29,7 @@
 .grid-container {
   position: absolute;
   top: 15vh;
-  left: 37vw;
+  left: 40vw;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
