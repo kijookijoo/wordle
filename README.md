@@ -1,16 +1,54 @@
-# React + Vite
+## How to Play
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**https://quickwordle.vercel.app/**
 
-Currently, two official plugins are available:
+1. Type any 5 letter English word.
+2. Press Enter to submit.
+3. Tile colors will update:
+   - 🟩 Green — correct letter, correct position
+   - 🟨 Yellow — correct letter, wrong position
+   - ⬜ Grey — letter not in the word
+4. You have 7 attempts to guess the answer.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Wordle — Built from Scratch
 
-## React Compiler
+A Wordle clone built with React.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The motivation behind this project came from practicing DSA on LeetCode and wondering how those abstract concepts translate into something people actually use. That thought led me to Wordle, which is an example of how simple data structures like 2D matrices are used for the implementation of a simple yet engaging game.
 
-## Expanding the ESLint configuration
+Wordle is a great example because it uses:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- A 2D character matrix for the board
+- Letter frequency maps to evaluate guesses
+- State transitions that mirror algorithmic thinking
+
+This project implements full Wordle logic using a 2D matrix structure that handles guesses, evaluates correctness, and updates the grid exactly like the real game.
+
+
+## Project Structure
+
+```
+src/
+ ├── components/
+ │    ├── Grid.jsx
+ │    ├── Keyboard.jsx
+ │    ├── Header.jsx
+ ├── pages/
+ │    └── GamePage.jsx
+ ├── App.jsx
+ └── main.jsx
+```
+
+## Built With
+
+- React
+- JavaScript 
+- HTML/CSS
+
+## Potential Improvements for the Futur
+
+- Daily mode (new word every 24 hours)
+- Smooth animations
+- Dictionary validation (connect to database)
+- Sound effects
+- Mobile compatibility
