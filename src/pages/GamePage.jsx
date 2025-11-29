@@ -43,6 +43,8 @@ function GamePage() {
         [null, null, null, null, null],
     ]);
 
+    const [letterStates, setLetterStates] = useState({});
+
 
     const [inputValue, setInputValue] = useState('');
     const inputRef = useRef(null);
@@ -160,23 +162,34 @@ function GamePage() {
         }
 
         let rowColors = [];
+        const newLetterStates = { ...letterStates };
 
         for (let i = 0; i < 5; i++) {
-            if (answerRef.current[i] === grid[currentRow][i]) {
-                rowColors.push("green");
-
-            } else if (answerRef.current.includes(grid[currentRow][i])) {
-                rowColors.push("yellow");
-                
+            const letter = grid[currentRow][i];
+            let color;
+            
+            if (answerRef.current[i] === letter) {
+                color = "green";
+            } else if (answerRef.current.includes(letter)) {
+                color = "yellow";
             } else {
-                rowColors.push("grey");
+                color = "grey";
+            }
+            
+            rowColors.push(color);
+            
+            // Update letter state with priority: green > yellow > grey
+            if (!newLetterStates[letter] || 
+                (color === "green") || 
+                (color === "yellow" && newLetterStates[letter] !== "green")) {
+                newLetterStates[letter] = color;
             }
         }
+        
         console.log(rowColors);
-
         changeColor(currentRow, rowColors);
-        console.log(gridColor)
-
+        setLetterStates(newLetterStates);
+        console.log(gridColor);
     }
 
     return (
@@ -197,7 +210,7 @@ function GamePage() {
 
             <Grid grid={grid} gridColor={gridColor} />
 
-            <Keyboard />
+            <Keyboard letterStates={letterStates} />
 
         </>
 

@@ -22,12 +22,12 @@
   max-width: 800px;
 }
 
-.keyboard-cap {
+.keyboard-cap-grey, .keyboard-cap-yellow, .keyboard-cap-green {
   all: unset;
-  background-color: grey;
   height: 50px;
   font-family: "Courier New", Courier, monospace;
   font-weight: 900;
+  background-color: #3a3a3c;
   color: white;
   font-size: 36px;
   display: flex;
@@ -36,3 +36,12 @@
   padding-left: 20px;
   padding-right: 20px;
 }
+
+.keyboard-cap-green {
+    background-color: #538d4e;
+}
+
+.keyboard-cap-yellow {
+    background-color: #b69f3a;
+}
+
